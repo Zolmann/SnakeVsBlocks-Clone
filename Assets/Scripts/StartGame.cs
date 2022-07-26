@@ -7,7 +7,17 @@ public class StartGame : MonoBehaviour
 {
     public void Play()
     {
-        Debug.Log("Играем");
-        SceneManager.LoadScene("Level 1");
+        int NextScene = SceneManager.GetActiveScene().buildIndex + 1;
+
+        if (SceneManager.GetSceneByBuildIndex(NextScene).IsValid()) // переписать с тернарным оператором
+        {
+            Debug.Log($"Играем {NextScene} уровень");
+            SceneManager.LoadScene(NextScene);
+        }
+        else
+        {
+            Debug.Log("Вернулись на первый уровень");
+            SceneManager.LoadScene(1);
+        }
     }
 }
