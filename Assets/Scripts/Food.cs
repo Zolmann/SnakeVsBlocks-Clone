@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class Food : MonoBehaviour
 {
-    public Transform Player;
+    public SnakeBlock SnakeBlock;
+    public Player Player;
     private int _value;
     private AudioSource _sound; 
     void Awake()
@@ -15,11 +16,12 @@ public class Food : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         _sound.Play();
-        Player.localScale = new Vector3(Player.localScale.x, Player.localScale.y, Player.localScale.z + _value);
-        
+        SnakeBlock.ChangeSize(_value);
+        Player.HP += _value;     
     }
     private void OnTriggerExit(Collider other)
     {
         gameObject.GetComponent<MeshRenderer>().enabled = false;
+        Destroy(gameObject);
     }
 }

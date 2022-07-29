@@ -1,12 +1,16 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class Player : MonoBehaviour
 {
+    public GameLogic GameLogic;
     public int HP = 5;
+    public TMP_Text Lives;
     void Update()
     {
-        if (HP < 0) Debug.Log("It's dead");
+        Lives.text = HP.ToString();
+        if (HP <= 0) GameLogic.OnDeath();
     }
 }

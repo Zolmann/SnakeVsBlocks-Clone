@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class StartGame : MonoBehaviour
+public class ButtonHandler : MonoBehaviour
 {
     public void Play()
     {
@@ -19,5 +19,14 @@ public class StartGame : MonoBehaviour
             Debug.Log("Вернулись на первый уровень");
             SceneManager.LoadScene(1);
         }
+    }
+    public void Restart()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+    }
+    public void Quit()
+    {
+        Debug.Log("Вышли из игры");
+        Application.Quit();
     }
 }
