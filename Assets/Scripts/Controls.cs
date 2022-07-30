@@ -4,22 +4,23 @@ using UnityEngine;
 
 public class Controls : MonoBehaviour
 {
-    public Transform Player;
+    public Rigidbody Player;
     public Stage Stage;
-    public float Sensitivity;
+    public float Speed;
 
     private void Update()
     {
-        Player.position += Sensitivity * Time.deltaTime * Player.forward;
+        Player.velocity = new Vector3 (0, 0, Speed);
+
         if (Input.GetKey(KeyCode.LeftArrow))
-        {         
-            if (Player.position.x < Stage.Min_x) Player.position = new Vector3(Stage.Min_x, Player.position.y, Player.position.z) + Sensitivity * Time.deltaTime * Player.forward;
-            else Player.position += Sensitivity * Time.deltaTime * -Player.right;
+        {
+            Player.velocity += new Vector3(-Speed, 0, 0);
+            if (Player.position.x < Stage.Min_x) Player.position = new Vector3(Stage.Min_x, Player.position.y, Player.position.z);
         }
         if (Input.GetKey(KeyCode.RightArrow))
         {
-            if (Player.position.x > Stage.Max_x) Player.position = new Vector3(Stage.Max_x, Player.position.y, Player.position.z) + Sensitivity * Time.deltaTime * Player.forward;
-            else Player.position += Sensitivity * Time.deltaTime * Player.right;
+            Player.velocity += new Vector3 (Speed, 0, 0);
+            if (Player.position.x > Stage.Max_x) Player.position = new Vector3(Stage.Max_x, Player.position.y, Player.position.z);
         }
     }
 }

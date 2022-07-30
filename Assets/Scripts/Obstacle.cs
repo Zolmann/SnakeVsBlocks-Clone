@@ -6,6 +6,7 @@ using TMPro;
 public class Obstacle : MonoBehaviour
 {
     private int _basepower;
+    public SnakeBlock SnakeBlock;
     public Player Player;
     private readonly float _colorMultiplier = 0.02f;
     public TMP_Text _text;
@@ -17,17 +18,27 @@ public class Obstacle : MonoBehaviour
         _text.text = _basepower.ToString();
         _particleSystem = GetComponent<ParticleSystem>();
     }
-    private void OnCollisionStay(Collision collision)
+    private void OnCollisionEnter(Collision collision)
     {
-        _particleSystem.Play();
-        int _power = _basepower;
-        while (_power  > 0)
+        StartCoroutine(Crash());
+    }
+
+    IEnumerator Crash()
+    {
+        while (_basepower > 0 && Player.HP > 0)
         {
-            Debug.Log($"Hp left:{_power}");
-            _power--;
+            yield return new WaitForSeconds(0.1f);
+            _particleSystem.Play();
+            _basepower--;
             Player.HP--;
+            _text.text = _basepower.ToString();
         }
-        if (_basepower < 10) Destroy(gameObject, 0.1f * _basepower);
-        else Destroy(gameObject, (0.05f * _basepower));
+        SnakeBlock.ChangeSize(-4);
+        if (Player.HP >= 1 || _basepower == 0) Destroy(gameObject);
+        else Player.GameLogic.OnDeath();        
+    }
+    private void OnCollisionExit(Collision collision)
+    {
+        StopAllCoroutines();
     }
 }
