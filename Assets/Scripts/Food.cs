@@ -16,7 +16,7 @@ public class Food : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         _sound.Play();
-        SnakeBlock.ChangeSize(_value);
+        SnakeBlock.ChangeSize(_value * 2);
         Player.HP += _value;     
     }
     private void OnTriggerExit(Collider other)

@@ -5,14 +5,17 @@ using UnityEngine.SceneManagement;
 
 public class ButtonHandler : MonoBehaviour
 {
+    public int NextScene { get; private set; }
+    private void Awake()
+    {
+        NextScene = SceneManager.GetActiveScene().buildIndex + 1;
+    }
     public void Play()
     {
-        int NextScene = SceneManager.GetActiveScene().buildIndex + 1;
-
-        if (SceneManager.GetSceneByBuildIndex(NextScene).IsValid()) // переписать с тернарным оператором
+        if (NextScene < 3) // переписать с тернарным оператором
         {
             Debug.Log($"»граем {NextScene} уровень");
-            SceneManager.LoadScene(NextScene);
+            SceneManager.LoadScene(NextScene);            
         }
         else
         {
@@ -22,7 +25,8 @@ public class ButtonHandler : MonoBehaviour
     }
     public void Restart()
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        Debug.Log("Ќачали заново");
+        SceneManager.LoadScene(NextScene - 1);
     }
     public void Quit()
     {
