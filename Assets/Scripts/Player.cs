@@ -6,7 +6,7 @@ using TMPro;
 public class Player : MonoBehaviour
 {
     public GameLogic GameLogic;
-    public int HP = 5;
+    public int HP = 10;
     public TMP_Text Lives;
     void Update()
     {

@@ -8,6 +8,7 @@ public class GameLogic : MonoBehaviour
     private AudioSource _maintheme;
     public RestartUI RestartUI;
     public FinishUI FinishUI;
+    public MainScreen MainScreen;
    public enum Status
     {
         Play,
@@ -28,6 +29,7 @@ public class GameLogic : MonoBehaviour
         CurrentStatus = Status.Lose;
         Controls.Player.gameObject.SetActive(false);
         RestartUI.gameObject.SetActive(true);
+        MainScreen.gameObject.SetActive(false);
     }
     public void OnWin()
     {
@@ -37,5 +39,6 @@ public class GameLogic : MonoBehaviour
         CurrentStatus = Status.Win;
         Controls.Player.gameObject.SetActive(false);
         FinishUI.gameObject.SetActive(true);
+        MainScreen.gameObject.SetActive(false);
     }
 }

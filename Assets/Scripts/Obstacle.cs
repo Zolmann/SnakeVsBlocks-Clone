@@ -6,14 +6,16 @@ using TMPro;
 public class Obstacle : MonoBehaviour
 {
     private int _basepower;
+    private int _maxpower;
     public SnakeBlock SnakeBlock;
     public Player Player;
-    private readonly float _colorMultiplier = 0.02f;
+    private readonly float _colorMultiplier = 0.04f;
     public TMP_Text _text;
     private ParticleSystem _particleSystem;
     void Awake()
     {
-        _basepower = Random.Range(1, 26);
+        _basepower = Random.Range(1, 11);
+        _maxpower = _basepower;
         gameObject.GetComponent<Renderer>().material.SetFloat("Power", _basepower * _colorMultiplier);
         _text.text = _basepower.ToString();
         _particleSystem = GetComponent<ParticleSystem>();
@@ -33,7 +35,7 @@ public class Obstacle : MonoBehaviour
             Player.HP--;
             _text.text = _basepower.ToString();
         }
-        SnakeBlock.ChangeSize(-4);
+        if (SnakeBlock.transform.localScale.y > 1) SnakeBlock.ChangeSize(-_maxpower);
         if (Player.HP >= 1 || _basepower == 0) Destroy(gameObject);
         else Player.GameLogic.OnDeath();        
     }
