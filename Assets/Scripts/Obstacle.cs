@@ -26,16 +26,16 @@ public class Obstacle : MonoBehaviour
 
     IEnumerator Crash()
     {
-        while (_basepower > 0 && Player.HP > 0)
+        while (_basepower > 0 && Player.HP > 1)
         {
             yield return new WaitForSeconds(0.1f);
             _particleSystem.Play();
             _basepower--;
             Player.HP--;
+            SnakeBlock.Shrink();
             _text.text = _basepower.ToString();
         }
-        if (SnakeBlock.transform.localScale.y > 1) SnakeBlock.ChangeSize(-_maxpower);
-        if (Player.HP >= 1 || _basepower == 0) Destroy(gameObject);
+        if (Player.HP >= 1 && _basepower == 0) Destroy(gameObject);
         else Player.GameLogic.OnDeath();        
     }
     private void OnCollisionExit(Collision collision)

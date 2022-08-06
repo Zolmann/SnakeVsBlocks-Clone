@@ -7,10 +7,9 @@ public class Controls : MonoBehaviour
     public float Speed;
     private float _turnVelocity = 1;
 
-    private void Update()
+    private void FixedUpdate()
     {
         Player.velocity = new Vector3 (0, 0, Speed);
-
         if (Input.GetKey(KeyCode.LeftArrow))
         {
             Player.velocity += new Vector3(-Speed + _turnVelocity, 0, 0);

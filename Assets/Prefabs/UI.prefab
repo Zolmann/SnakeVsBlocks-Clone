@@ -103,7 +103,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fdd1c1051229b3649815377dc8ee7e39, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  SnakeBlock: {fileID: 0}
+  SnakeBlock: {fileID: 8113871520219145479, guid: 0923e7cf1b542604c9aeb7f0e84add0d, type: 3}
   Finish: {fileID: 0}
   Slider: {fileID: 6409973402551268647}
 --- !u!1 &453053649483859538
